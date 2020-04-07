@@ -30,8 +30,8 @@ def main(start_num = 1, end_num = 8761):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    for i, img_num in enumerate(range(start_num, end_num)):
-        percent = round(img_num/end_num)
+    for i, img_num in enumerate(range(start_num, end_num+1)):
+        percent = round(img_num/(end_num/100))
         img_num = add_zeroes(img_num)
 
         if os.path.exists(directory + img_num + '.jpg'):
@@ -51,7 +51,7 @@ def main(start_num = 1, end_num = 8761):
 
                 print('\033c')
 
-                status = "Downloaded {}/{}, {}% ".format(i, end_num, percent)
+                status = "Downloaded {}/{}, {}% ".format(i+1, end_num, percent)
                 print(status + bar)
 
             except Exception as e:
