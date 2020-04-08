@@ -19,3 +19,14 @@ pip install -r requirements.txt
 ```
 python moon.py
 ```
+
+## Result
+This is a gif of first 50 images:
+
+![Image](phases.gif)
+
+The data can go well over 300Mb and take a long time to download and the gif itself will be over 100Mb.
+
+## Updates in Progress
+1. Implementing a step feature that will allow to download every n<sup>th</sup> image rathher than all 8761 images which will save time. Although the animationwill be not as smooth.
+2. Another script that will download more detailed and higher quality pictures with position angle and liberation of moon.
