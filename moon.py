@@ -43,16 +43,18 @@ def main(start_num = 1, end_num = 8761):
                 get_image(img_num, directory)
 
                 bar = (
-                        "["
-                        + "#" * int(0.5 * percent)
+                        "|"
+                        + "█" * int(0.5 * percent)
                         + "-" * int(0.5* (100 - percent))
-                        + "]"
+                        + "|"
                 )
 
                 print('\033c')
 
                 status = "Downloaded {}/{}, {}% ".format(i+1, end_num, percent)
-                print(status + bar)
+                print("Collecting images")
+                print('  ' + status)
+                print('     ' + bar)
 
             except Exception as e:
                 print(e)
