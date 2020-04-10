@@ -13,8 +13,7 @@ args = parser.parse_args()
 
 
 def get_image(img_num, directory):
-    url = 'https://svs.gsfc.nasa.gov/vis/a000000/a004400/a004442/frames/730\
-    x730_1x1_30p/moon.{}.jpg'.format(img_num)
+    url = 'https://svs.gsfc.nasa.gov/vis/a000000/a004400/a004442/frames/730x730_1x1_30p/moon.{}.jpg'.format(img_num)
     img_name = directory + img_num + '.jpg'
     req.urlretrieve(url, img_name)
     return
