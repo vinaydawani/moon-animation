@@ -1,22 +1,34 @@
-from urllib import request as req
 import os
+import argparse
+from urllib import request as req
 from imageio import imread, mimsave
 
 
+parser = argparse.ArgumentParser(description="Taking some flags")
+parser.add_argument('-f', '--frequency', default=1,
+                    help='frequency of download')
+parser.add_argument('--start', default=1, help='start position')
+parser.add_argument('--stop', default=8761, help='stop position')
+args = parser.parse_args()
+
+
 def get_image(img_num, directory):
-    url = 'https://svs.gsfc.nasa.gov/vis/a000000/a004400/a004442/frames/730x730_1x1_30p/moon.{}.jpg'.format(img_num)
+    url = 'https://svs.gsfc.nasa.gov/vis/a000000/a004400/a004442/frames/730\
+    x730_1x1_30p/moon.{}.jpg'.format(img_num)
     img_name = directory + img_num + '.jpg'
     req.urlretrieve(url, img_name)
     return
 
+
 def add_zeroes(img_num):
     return '{:04d}'.format(img_num)
 
-def make_vid(start_num, end_num, directory):
-    files = [img for img in os.listdir(directory) if '.jpg' in img]
+
+def make_gif(start_num, end_num, directory, freq):
+    #  files = [img for img in os.listdir(directory) if '.jpg' in img]
 
     images = []
-    for img_num in range(start_num, end_num):
+    for img_num in range(start_num, end_num, freq):
         img_name = directory + add_zeroes(img_num) + '.jpg'
         images.append(imread(img_name))
 
@@ -24,18 +36,21 @@ def make_vid(start_num, end_num, directory):
 
     return
 
-def main(start_num = 1, end_num = 8761):
+
+def main(start_num=1, end_num=8761, freq=1):
     directory = 'images/'
 
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-    for i, img_num in enumerate(range(start_num, end_num+1)):
-        percent = round(img_num/(end_num/100))
+    for i, img_num in enumerate(range(start_num, end_num + 1, freq)):
+        percent = round(img_num / (end_num / 100))
         img_num = add_zeroes(img_num)
 
         if os.path.exists(directory + img_num + '.jpg'):
-            print(f"Image {img_num + '.jpg'} already available in directory {directory}")
+            print(
+                f"Image {img_num + '.jpg'} already available in\
+                 directory {directory}")
             continue
 
         while True:
@@ -43,15 +58,16 @@ def main(start_num = 1, end_num = 8761):
                 get_image(img_num, directory)
 
                 bar = (
-                        "|"
-                        + "█" * int(0.5 * percent)
-                        + "-" * int(0.5* (100 - percent))
-                        + "|"
+                    "|"
+                    + "█" * int(0.5 * percent)
+                    + "-" * int(0.5 * (100 - percent))
+                    + "|"
                 )
 
                 print('\033c')
 
-                status = "Downloaded {}/{}, {}% ".format(i+1, end_num, percent)
+                status = "Downloaded {}/{}, {}% ".format(
+                    i + 1, end_num//freq, percent)
                 print("Collecting images")
                 print('  ' + status)
                 print('     ' + bar)
@@ -61,10 +77,9 @@ def main(start_num = 1, end_num = 8761):
                 continue
             break
 
-    make_vid(start_num, end_num, directory)
+    make_gif(start_num, end_num, directory, freq)
     return
 
+
 if __name__ == '__main__':
-    start = int(input("start: "))
-    stop = int(input("Stop: "))
-    main(start, stop)
+    main(int(args.start), int(args.stop), int(args.frequency))
