@@ -41,5 +41,6 @@ This is a gif of first 50 images:
 
 The data can go well over 300Mb and take a long time to download and the gif itself will be over 100Mb.
 
-## Updates in Progress
-1. Another script that will download more detailed and higher quality pictures with position angle and liberation of moon.
+## Notes
+  * Usege of moon_det.py is same as moon.py
+  * Each image downloaded by moon_det.py is over 10Mb so it'll take a really, really long time to download pictures for a good gif :(
