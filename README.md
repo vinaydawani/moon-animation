@@ -19,6 +19,20 @@ pip install -r requirements.txt
 ```
 python moon.py
 ```
+Some useful arguments
+```
+-h, --help            show this help message and exit
+-f FREQUENCY, --frequency FREQUENCY
+                       frequency of download
+-srt START, --start START
+                       start position
+-stp STOP, --stop STOP
+                       stop position
+```
+As the complete set of pictures is very large, these arguments are useful in creating smaller gifs. For example, to make a gif of first 500 images with every 5th image, try:
+```
+python moon.py -srt 1 -stp 500 -f 5
+```
 
 ## Result
 This is a gif of first 50 images:
@@ -28,5 +42,4 @@ This is a gif of first 50 images:
 The data can go well over 300Mb and take a long time to download and the gif itself will be over 100Mb.
 
 ## Updates in Progress
-1. Implementing a step feature that will allow to download every n<sup>th</sup> image rathher than all 8761 images which will save time. Although the animationwill be not as smooth.
-2. Another script that will download more detailed and higher quality pictures with position angle and liberation of moon.
+1. Another script that will download more detailed and higher quality pictures with position angle and liberation of moon.
