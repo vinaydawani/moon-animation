@@ -7,8 +7,8 @@ from imageio import imread, mimsave
 parser = argparse.ArgumentParser(description="Taking some flags")
 parser.add_argument('-f', '--frequency', default=1,
                     help='frequency of download')
-parser.add_argument('--start', default=1, help='start position')
-parser.add_argument('--stop', default=8761, help='stop position')
+parser.add_argument('-srt', '--start', default=1, help='start position')
+parser.add_argument('-stp', '--stop', default=8761, help='stop position')
 args = parser.parse_args()
 
 
